@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
+    android:gravity="center_horizontal"
     android:background="@color/background"
-    android:padding="30sp">
+    android:padding="20sp">
 
     <ImageView
         android:id="@+id/logo"
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:layout_marginTop="50sp"
-        android:src="@drawable/goal"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:src="@drawable/goal" />
 
     <EditText
         android:id="@+id/emailTxt"
@@ -45,8 +42,6 @@
         android:layout_marginTop="10sp"
         android:background="@drawable/rounded_button"
         android:text="Login"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/passTxt" />
 
     <LinearLayout
@@ -55,6 +50,7 @@
         android:orientation="horizontal"
         android:gravity="center"
         android:padding="10sp"
+        android:layout_gravity="center"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnLogin">
@@ -79,4 +75,4 @@
             android:text="Create account"
             app:layout_constraintTop_toBottomOf="@id/btnLogin" />
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
