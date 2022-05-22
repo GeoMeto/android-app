@@ -1,25 +1,22 @@
 package com.tu.challengeyourself;
 
-import static com.tu.challengeyourself.constants.Keys.INTENT_DATA;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private Button createAccBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        createAccBtn = findViewById(R.id.btnCreateAccount);
+        Button createAccBtn = findViewById(R.id.btnCreateAccount);
         createAccBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -28,6 +25,37 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        Button resetPassBtn = findViewById(R.id.btnResetPass);
+        resetPassBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent createAccIntent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
+                startActivity(createAccIntent);
+            }
+        });
 
+        Button loginBtn = findViewById(R.id.btnLogin);
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (successfulLogin()) {
+                    Intent mainIntent = new Intent(LoginActivity.this, ChallengesActivity.class);
+                    mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(mainIntent);
+                } else {
+                    showToastWrongCredentials();
+                }
+
+            }
+        });
+
+    }
+
+    private void showToastWrongCredentials() {
+        Toast.makeText(LoginActivity.this, "Invalid email or password", Toast.LENGTH_LONG).show();
+    }
+
+    private boolean successfulLogin() {
+        return false;
     }
 }

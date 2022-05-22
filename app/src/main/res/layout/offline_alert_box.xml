@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:padding="20sp"
+        android:text="No internet access found! Challenge groups are not reachable. "
+        android:layout_width="270sp"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/dismissOfflineAlertBtn"
+        android:text="OK"
+        android:background="@drawable/rounded_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
