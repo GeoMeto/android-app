@@ -16,24 +16,12 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Button createAccBtn = findViewById(R.id.btnCreateAccount);
-        createAccBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent createAccIntent = new Intent(LoginActivity.this, CreateAccountActivity.class);
-                startActivity(createAccIntent);
-            }
-        });
+        setLoginListener();
+        setCreateAccListener();
+        setResetPassListener();
+    }
 
-        Button resetPassBtn = findViewById(R.id.btnResetPass);
-        resetPassBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent createAccIntent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
-                startActivity(createAccIntent);
-            }
-        });
-
+    private void setLoginListener() {
         Button loginBtn = findViewById(R.id.btnLogin);
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,10 +33,30 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     showToastWrongCredentials();
                 }
-
             }
         });
+    }
 
+    private void setCreateAccListener() {
+        Button createAccBtn = findViewById(R.id.btnCreateAccount);
+        createAccBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent createAccIntent = new Intent(LoginActivity.this, CreateAccountActivity.class);
+                startActivity(createAccIntent);
+            }
+        });
+    }
+
+    private void setResetPassListener() {
+        Button resetPassBtn = findViewById(R.id.btnResetPass);
+        resetPassBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent createAccIntent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
+                startActivity(createAccIntent);
+            }
+        });
     }
 
     private void showToastWrongCredentials() {

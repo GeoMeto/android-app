@@ -36,13 +36,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10sp"
-        android:text="Username will be displayed in the app, including in Challenge yourself forum." />
+        android:text="Username will be displayed in the app, including in Challenge yourself forum. It can be changed from settings." />
 
     <CheckBox
         android:id="@+id/termsCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10sp"
+        android:buttonTint="@color/black"
         android:text="Agree with terms and conditions" />
 
     <Button
