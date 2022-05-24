@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (successfulLogin()) {
-                    Intent mainIntent = new Intent(LoginActivity.this, ChallengesActivity.class);
+                    Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
                     mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(mainIntent);
                 } else {
@@ -64,6 +64,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean successfulLogin() {
-        return false;
+        return true;
     }
 }

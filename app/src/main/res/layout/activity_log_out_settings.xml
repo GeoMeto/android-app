@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="20dp"
+    android:background="@color/background"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".settings.dialogs.LogOutSettingsActivity">
+
+    <TextView
+        android:layout_marginTop="40dp"
+        android:textSize="20sp"
+        android:text="DO YOU REALLY WANT TO LOGOUT?"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/noLogOutBtn"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/rounded_button"
+            android:text="No"
+            android:layout_width="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/yesLogOutBtn"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/rounded_button"
+            android:text="Yes"
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</LinearLayout>

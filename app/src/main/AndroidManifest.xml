@@ -14,13 +14,28 @@
         android:theme="@style/Theme.ChallengeYourself"
         tools:targetApi="31">
         <activity
+            android:name=".settings.dialogs.LogOutSettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".settings.dialogs.DeleteAccountSettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".settings.dialogs.NotificationSettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".settings.dialogs.ChangeUsernameSettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".settings.dialogs.ResetPasswordSettingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".SettingsActivity"
             android:exported="false" />
         <activity
             android:name=".ResetPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".ChallengesActivity"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".CreateAccountActivity"
