@@ -29,9 +29,6 @@
             android:name=".settings.dialogs.ResetPasswordSettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".SettingsActivity"
-            android:exported="false" />
-        <activity
             android:name=".ResetPasswordActivity"
             android:exported="false" />
         <activity

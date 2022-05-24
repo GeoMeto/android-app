@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.tu.challengeyourself.R;
-import com.tu.challengeyourself.SettingsActivity;
 import com.tu.challengeyourself.settings.dialogs.ChangeUsernameSettingsActivity;
 import com.tu.challengeyourself.settings.dialogs.DeleteAccountSettingsActivity;
 import com.tu.challengeyourself.settings.dialogs.LogOutSettingsActivity;
@@ -88,7 +87,7 @@ public class SettingsFragment extends Fragment {
     }
 
     private void setChangeUsernameListener(View view) {
-        View resetPassContainer = view.findViewById(R.id.resetPassSettingsBtn);
+        View resetPassContainer = view.findViewById(R.id.changeUsernameSettingsBtn);
         resetPassContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,7 +97,7 @@ public class SettingsFragment extends Fragment {
     }
 
     private void setNotificationsListener(View view) {
-        View resetPassContainer = view.findViewById(R.id.resetPassSettingsBtn);
+        View resetPassContainer = view.findViewById(R.id.notificationSettingsBtn);
         resetPassContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,7 +107,7 @@ public class SettingsFragment extends Fragment {
     }
 
     private void setDeleteAccListener(View view) {
-        View resetPassContainer = view.findViewById(R.id.resetPassSettingsBtn);
+        View resetPassContainer = view.findViewById(R.id.deleteAccSettingsBtn);
         resetPassContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,7 +117,7 @@ public class SettingsFragment extends Fragment {
     }
 
     private void setLogOutListener(View view) {
-        View resetPassContainer = view.findViewById(R.id.resetPassSettingsBtn);
+        View resetPassContainer = view.findViewById(R.id.logOutSettingsBtn);
         resetPassContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

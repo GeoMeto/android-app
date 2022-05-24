@@ -11,8 +11,7 @@
         android:layout_height="match_parent"
         android:background="@color/background"
         android:orientation="vertical"
-        android:padding="30sp"
-        tools:context=".SettingsActivity">
+        android:padding="30sp">
 
         <LinearLayout
             android:id="@+id/resetPassSettingsBtn"
@@ -96,7 +95,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/LogOutSettingsBtn"
+            android:id="@+id/logOutSettingsBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
