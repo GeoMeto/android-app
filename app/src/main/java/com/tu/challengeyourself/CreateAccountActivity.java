@@ -70,8 +70,6 @@ public class CreateAccountActivity extends AppCompatActivity {
                 if (!isTermsAndConditionsChecked) {
                     LayoutInflater inflater = getLayoutInflater();
                     View termsLayout = inflater.inflate(R.layout.terms_text_box, null);
-                    getApplicationContext().getResources().getResourceName();
-                    termsLayout.setId();
                     AlertDialog.Builder builder = new AlertDialog.Builder(CreateAccountActivity.this);
                     builder.setView(termsLayout);
                     AlertDialog alertDialog = builder.create();
@@ -83,8 +81,8 @@ public class CreateAccountActivity extends AppCompatActivity {
                             alertDialog.dismiss();
                         }
                     });
-                    isTermsAndConditionsChecked = termsCheckBox.isChecked();
                 }
+                isTermsAndConditionsChecked = termsCheckBox.isChecked();
             }
         });
     }
