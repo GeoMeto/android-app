@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "732323220540",
+    "project_id": "challengeyourself-b5a75",
+    "storage_bucket": "challengeyourself-b5a75.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:732323220540:android:518eec782a79504c8c4739",
+        "android_client_info": {
+          "package_name": "com.tu.challengeyourself"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "732323220540-43ek8v6ptfo4ktbk45g3gb0hjq23ijse.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAR-Gsro0-7dEmaRPbL3eU5SCZ_hynT4Yk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "732323220540-43ek8v6ptfo4ktbk45g3gb0hjq23ijse.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
