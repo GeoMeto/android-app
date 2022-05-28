@@ -28,7 +28,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     private final String TAG = this.getClass().getCanonicalName();
     boolean isTermsAndConditionsChecked = false;
     private FirebaseAuth mAuth;
-    private EditText passwordEdit, emailEdit;
+    private EditText passwordEdit, emailEdit, usernameEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +38,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         emailEdit = findViewById(R.id.editCreateEmail);
         passwordEdit = findViewById(R.id.editCreatePassword);
-
-
+        usernameEdit = findViewById(R.id.editCreateUserName);
 
         setTermsListener();
         setCreateAccListener();
@@ -53,10 +52,18 @@ public class CreateAccountActivity extends AppCompatActivity {
                 if (!isTermsAndConditionsChecked) {
                     showToast("You have to check the terms and conditions!");
                     return;
+                } if(!isUsernameValid()) {
+                    return;
                 }
                 createAccount();
             }
         });
+    }
+
+    private boolean isUsernameValid() {
+        String username = usernameEdit.getText().toString();
+
+        return false;
     }
 
     private void createAccount() {

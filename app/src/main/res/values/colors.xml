@@ -9,6 +9,7 @@
     <color name="red">#E91E1E</color>
     <color name="white">#FFFFFFFF</color>
     <color name="background">#477D87</color>
+    <color name="backgroundCard">#62B0B3</color>
     <color name="selectedNavTab">#2B4B51</color>
     <color name="login_btn">#73F6E7</color>
 </resources>

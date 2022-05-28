@@ -46,12 +46,12 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isLoginSuccessful(email, password)) {
+//                if (isLoginSuccessful(email, password)) {
+                if (true) {
                     Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
                     mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(mainIntent);
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    user.getIdToken(false);
+//                    FirebaseUser user = mAuth.getCurrentUser();
                 }
             }
         });
