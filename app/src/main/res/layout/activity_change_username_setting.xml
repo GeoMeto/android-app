@@ -1,29 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:padding="20dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
+    android:orientation="vertical"
+    android:padding="20dp"
     tools:context=".settings.dialogs.ChangeUsernameSettingsActivity">
+
     <TextView
-        android:padding="3dp"
-        android:textSize="20sp"
-        android:text="NEW USERNAME"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:text="NEW USERNAME"
+        android:textSize="20sp" />
+
     <EditText
         android:id="@+id/usernameSettingsEdit"
-        android:inputType="text"
-        android:hint="NEW USERNAME"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:hint="NEW USERNAME"
+        android:inputType="text" />
+
     <Button
-        android:layout_gravity="center"
-        android:padding="10dp"
-        android:background="@drawable/rounded_button"
-        android:text="SET USERNAME"
+        android:id="@+id/usernameSettingsButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/rounded_button"
+        android:padding="10dp"
+        android:text="SET USERNAME" />
 </LinearLayout>

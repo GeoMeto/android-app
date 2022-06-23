@@ -1,12 +1,11 @@
 package com.tu.challengeyourself;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
+import static com.tu.challengeyourself.constants.Keys.CREATE_USER_URL;
+import static com.tu.challengeyourself.constants.Keys.TOKEN;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -14,27 +13,28 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
-import com.google.firebase.auth.FirebaseUser;
-import com.tu.challengeyourself.utils.MethodHelper;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.gson.GsonBuilder;
+import com.tu.challengeyourself.models.User;
+import com.tu.challengeyourself.requests.VolleyManager;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class CreateAccountActivity extends AppCompatActivity {
-    private final String TAG = this.getClass().getCanonicalName();
-    boolean isTermsAndConditionsChecked = false;
-    private FirebaseAuth mAuth;
+    private boolean isTermsAndConditionsChecked = false;
     private EditText passwordEdit, emailEdit, usernameEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
-        mAuth = FirebaseAuth.getInstance();
 
         emailEdit = findViewById(R.id.editCreateEmail);
         passwordEdit = findViewById(R.id.editCreatePassword);
@@ -53,6 +53,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                     showToast("You have to check the terms and conditions!");
                     return;
                 } if(!isUsernameValid()) {
+                    showToast("All fields are mandatory!");
                     return;
                 }
                 createAccount();
@@ -62,56 +63,57 @@ public class CreateAccountActivity extends AppCompatActivity {
 
     private boolean isUsernameValid() {
         String username = usernameEdit.getText().toString();
+        String email = emailEdit.getText().toString();
+        String password = passwordEdit.getText().toString();
 
-        return false;
+        return !username.isEmpty() && !email.isEmpty() && !password.isEmpty();
     }
 
     private void createAccount() {
         String email = emailEdit.getText().toString();
         String password = passwordEdit.getText().toString();
+        String username = usernameEdit.getText().toString();
+        User newUser = new User(email, password, username);
+        JSONObject jsonObject;
         try {
-            mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Log.d(TAG, "createUserWithEmail:success");
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                loginWithNewAccount(user);
-                            } else {
-                                try {
-                                    throw task.getException();
-                                } catch (FirebaseAuthWeakPasswordException e) {
-                                    passwordEdit.setError("This password is weak. Please use a password with at least 6 characters.");
-                                    passwordEdit.requestFocus();
-                                    showToast("This password is weak. Please use a password with at least 6 characters.");
-                                } catch (FirebaseAuthInvalidCredentialsException e) {
-                                    emailEdit.setError("Email is not correctly formatted.");
-                                    emailEdit.requestFocus();
-                                    showToast("Email is not correctly formatted.");
-                                } catch (FirebaseAuthUserCollisionException e) {
-                                    emailEdit.setError("This user already exists. Please use the login from.");
-                                    emailEdit.requestFocus();
-                                    showToast("This user already exists. Please use the login from.");
-                                } catch (Exception e) {
-                                    showToast("Authentication failed." + e.getMessage());
-                                }
-                                // If sign in fails, display a message to the user.
-                                Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            }
-                        }
-                    });
-        } catch (IllegalArgumentException e) {
-            Toast.makeText(CreateAccountActivity.this, "Email or password is empty!",
-                    Toast.LENGTH_SHORT).show();
+            jsonObject = new JSONObject(new GsonBuilder().create().toJson(newUser));
+        } catch (JSONException e) {
+            e.printStackTrace();
+            showToast("There was an error on serialization!");
+            return;
         }
+
+        VolleyManager.getInstance().getRequestQueue().add(new JsonObjectRequest(Request.Method.POST, CREATE_USER_URL, jsonObject,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        saveToken(response);
+                        startMainActivity();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        showToast("Please fill email in correct format and at least 6 characters password");
+                    }
+                }));
     }
 
-    private void loginWithNewAccount(FirebaseUser user) {
-        Intent loginIntent = new Intent(CreateAccountActivity.this, LoginActivity.class);
-        loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(loginIntent);
+    private void startMainActivity() {
+        Intent mainIntent = new Intent(CreateAccountActivity.this, MainActivity.class);
+        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(mainIntent);
+        finish();
+    }
+
+    private void saveToken(JSONObject response) {
+        try {
+            String token = response.getString("token");
+            PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString(TOKEN, token).commit();
+        } catch (JSONException e) {
+            showToast("There was an error on deserialization!");
+            e.printStackTrace();
+        }
     }
 
     private void showToast(String message) {
