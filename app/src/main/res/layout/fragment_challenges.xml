@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background"
     android:padding="10dp"
     tools:context=".fragments.ChallengesFragment">
@@ -11,16 +11,17 @@
     <ListView
         android:id="@+id/challengesList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:src="@drawable/ic_add"
-        app:tint="@color/white"
-        android:background="@color/login_btn"
+        android:id="@+id/btnCreateChallenge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="40dp"
-        android:layout_gravity="end|bottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:background="@color/login_btn"
+        android:src="@drawable/ic_add"
+        app:tint="@color/white" />
 
 </FrameLayout>

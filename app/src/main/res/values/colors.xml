@@ -12,4 +12,5 @@
     <color name="backgroundCard">#62B0B3</color>
     <color name="selectedNavTab">#2B4B51</color>
     <color name="login_btn">#73F6E7</color>
+    <color name="orange">#F57C00</color>
 </resources>

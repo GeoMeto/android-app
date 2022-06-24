@@ -23,7 +23,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.tu.challengeyourself.fragments.ChallengesFragment;
 import com.tu.challengeyourself.fragments.SettingsFragment;
 import com.tu.challengeyourself.fragments.SharingGroupFragment;
-import com.tu.challengeyourself.requests.AuthorizedRequest;
+import com.tu.challengeyourself.requests.AuthorizedJsonRequest;
 import com.tu.challengeyourself.requests.VolleyManager;
 import com.tu.challengeyourself.utils.ViewPagerAdapter;
 
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         String token = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString(TOKEN, "");
 
         VolleyManager.getInstance().addToRequestQueue(
-                new AuthorizedRequest(Request.Method.GET, GET_USERNAME_URL, token, new Response.Listener<JSONObject>() {
+                new AuthorizedJsonRequest(Request.Method.GET, GET_USERNAME_URL, token, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
@@ -72,9 +72,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void navigateToLogin() {
-        Intent mainIntent = new Intent(MainActivity.this, LoginActivity.class);
-        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(mainIntent);
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
         finish();
     }
 

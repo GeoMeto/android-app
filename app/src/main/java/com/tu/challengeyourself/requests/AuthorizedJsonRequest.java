@@ -12,11 +12,11 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AuthorizedRequest {
+public class AuthorizedJsonRequest {
 
     private JsonObjectRequest request;
 
-    public AuthorizedRequest(int requestMethod, String url, String token, Object body, Response.Listener listener, Response.ErrorListener errorListener) {
+    public AuthorizedJsonRequest(int requestMethod, String url, String token, Object body, Response.Listener listener, Response.ErrorListener errorListener) {
         JSONObject jsonObject = null;
         try {
             jsonObject = new JSONObject(new GsonBuilder().create().toJson(body));
@@ -33,7 +33,7 @@ public class AuthorizedRequest {
         };
     }
 
-    public AuthorizedRequest(int requestMethod, String url, String token, Response.Listener listener, Response.ErrorListener errorListener) {
+    public AuthorizedJsonRequest(int requestMethod, String url, String token, Response.Listener listener, Response.ErrorListener errorListener) {
 
         this.request = new JsonObjectRequest(requestMethod, url, null, listener, errorListener) {
             @Override

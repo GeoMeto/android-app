@@ -17,7 +17,7 @@ import com.android.volley.VolleyError;
 import com.tu.challengeyourself.LoginActivity;
 import com.tu.challengeyourself.MainActivity;
 import com.tu.challengeyourself.R;
-import com.tu.challengeyourself.requests.AuthorizedRequest;
+import com.tu.challengeyourself.requests.AuthorizedJsonRequest;
 import com.tu.challengeyourself.requests.VolleyManager;
 
 import org.json.JSONObject;
@@ -36,7 +36,7 @@ public class DeleteAccountSettingsActivity extends AppCompatActivity {
                 String token = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString(TOKEN, "");
 
                 VolleyManager.getInstance().addToRequestQueue(
-                        new AuthorizedRequest(Request.Method.POST, DELETE_ACCOUNT_URL, token, new Response.Listener<JSONObject>() {
+                        new AuthorizedJsonRequest(Request.Method.POST, DELETE_ACCOUNT_URL, token, new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
                                 clearToken();
@@ -65,9 +65,9 @@ public class DeleteAccountSettingsActivity extends AppCompatActivity {
     }
 
     private void navigateToLogin() {
-        Intent mainIntent = new Intent(DeleteAccountSettingsActivity.this, LoginActivity.class);
-        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(mainIntent);
+        Intent intent = new Intent(DeleteAccountSettingsActivity.this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
         finish();
     }
 

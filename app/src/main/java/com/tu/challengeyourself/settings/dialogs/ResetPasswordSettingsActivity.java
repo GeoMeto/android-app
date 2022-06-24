@@ -21,7 +21,7 @@ import com.android.volley.VolleyError;
 import com.tu.challengeyourself.MainActivity;
 import com.tu.challengeyourself.R;
 import com.tu.challengeyourself.models.ChangePassword;
-import com.tu.challengeyourself.requests.AuthorizedRequest;
+import com.tu.challengeyourself.requests.AuthorizedJsonRequest;
 import com.tu.challengeyourself.requests.VolleyManager;
 import com.tu.challengeyourself.utils.EncryptionUtils;
 
@@ -51,7 +51,7 @@ public class ResetPasswordSettingsActivity extends AppCompatActivity {
                     String token = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString(TOKEN, "");
                     EncryptionUtils encUtil = new EncryptionUtils();
                     VolleyManager.getInstance().addToRequestQueue(
-                            new AuthorizedRequest(Request.Method.POST, CHANGE_PASSWORD_URL, token, new ChangePassword(encUtil.encrypt(currentPass), encUtil.encrypt(newPass)),
+                            new AuthorizedJsonRequest(Request.Method.POST, CHANGE_PASSWORD_URL, token, new ChangePassword(encUtil.encrypt(currentPass), encUtil.encrypt(newPass)),
                                     new Response.Listener<JSONObject>() {
                                         @Override
                                         public void onResponse(JSONObject response) {

@@ -1,59 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/background"
-    android:padding="20dp"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/background"
+    android:orientation="vertical"
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/itemChallengeName"
-        android:text="Walking"
-        android:gravity="center"
-        android:textSize="26sp"
-        android:textStyle="bold"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Walking"
+        android:textSize="26sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/itemChallengeDesc"
-        android:layout_marginTop="10dp"
-        android:text="Walk more"
-        android:gravity="center"
-        android:textSize="22sp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="Walk more"
+        android:textSize="22sp" />
 
     <LinearLayout
-        android:weightSum="3"
-        android:padding="10dp"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
         <TextView
-            android:id="@+id/itemCompleteCounter"
-            android:text="Steps"
-            android:textSize="18sp"
-            android:layout_weight="1"
+            android:id="@+id/itemMeasurement"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:id="@+id/itemTargetCounter"
-            android:text="Target: 100"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
             android:maxLines="1"
-            android:textSize="18sp"
-            android:layout_weight="1"
+            android:text="Stepsssssss"
+            android:textSize="20sp" />
+
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
-        <Button
-            android:id="@+id/completeChallenge"
-            android:layout_marginLeft="55sp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/rounded_button"
-            android:text="Complete"
+            android:orientation="vertical"
+            android:textSize="20sp"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Target:"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/itemTargetCounter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="100"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:textSize="20sp"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Completed:"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/itemCompleteCounter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="100"
+                android:textSize="20sp" />
+        </LinearLayout>
+
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:weightSum="2">
 
+        <Button
+            android:id="@+id/deleteChallenge"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="45sp"
+            android:layout_weight="1"
+            android:textColor="@color/orange"
+            android:background="@drawable/rounded_button"
+            android:text="Delete" />
+
+        <Button
+            android:id="@+id/completeChallenge"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45sp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:text="Complete" />
+    </LinearLayout>
 </LinearLayout>

@@ -18,9 +18,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.tu.challengeyourself.MainActivity;
 import com.tu.challengeyourself.R;
-import com.tu.challengeyourself.models.User;
 import com.tu.challengeyourself.models.Username;
-import com.tu.challengeyourself.requests.AuthorizedRequest;
+import com.tu.challengeyourself.requests.AuthorizedJsonRequest;
 import com.tu.challengeyourself.requests.VolleyManager;
 
 import org.json.JSONObject;
@@ -43,7 +42,7 @@ public class ChangeUsernameSettingsActivity extends AppCompatActivity {
                 Username user = new Username(usernameEdit.getText().toString());
 
                 VolleyManager.getInstance().addToRequestQueue(
-                        new AuthorizedRequest(Request.Method.POST, CHANGE_USERNAME_URL, token, user, new Response.Listener<JSONObject>() {
+                        new AuthorizedJsonRequest(Request.Method.POST, CHANGE_USERNAME_URL, token, user, new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
                                 navigateToMain();
