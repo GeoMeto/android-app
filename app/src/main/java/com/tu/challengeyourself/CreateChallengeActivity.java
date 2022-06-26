@@ -5,6 +5,7 @@ import static com.tu.challengeyourself.constants.Keys.CREATE_CHALLENGES_URL;
 import static com.tu.challengeyourself.constants.Keys.TOKEN;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
@@ -96,6 +98,7 @@ public class CreateChallengeActivity extends AppCompatActivity {
         targetEdit.setText(challengeDTO.getTarget() + "");
 
         completeBtn.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
                 String token = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString(TOKEN, "");

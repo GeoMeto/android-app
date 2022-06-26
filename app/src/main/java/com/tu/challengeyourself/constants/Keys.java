@@ -21,12 +21,13 @@ public class Keys {
     public static final String CREATE_CHALLENGES_URL = BASE_CHALLENGES_URL + "/new";
     public static final String GET_CHALLENGES_URL = BASE_CHALLENGES_URL + "/completed";
     public static final String COMPLETE_CHALLENGES_URL = BASE_CHALLENGES_URL + "/complete";
-    public static final String DELETE_CHALLENGES_URL = BASE_CHALLENGES_URL + "/";
+    public static final String DELETE_CHALLENGES_URL = BASE_CHALLENGES_URL + "/%d";
     //Sharing endpoints
     public static final String BASE_SHARING_URL = BASE_SECURE_URL + "share/";
     public static final String GET_ALL_SHARING_URL = BASE_SHARING_URL + "all";
     public static final String GET_HOT_SHARING_URL = BASE_SHARING_URL + "hot";
-    public static final String GET_USER_SHARING_URL = BASE_SHARING_URL + "user/";
+    public static final String GET_USER_SHARING_URL = BASE_SHARING_URL + "user";
     public static final String CREATE_SHARING_URL = BASE_SHARING_URL + "new";
-    public static final String LIKE_SHARING_URL = BASE_SHARING_URL + "like/";
+    public static final String LIKE_SHARING_URL = BASE_SHARING_URL + "like/%d";
+    public static final String DELETE_SHARING_URL = BASE_SHARING_URL + "delete/%d";
 }

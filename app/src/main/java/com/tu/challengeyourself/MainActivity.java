@@ -6,13 +6,9 @@ import static com.tu.challengeyourself.constants.Keys.TOKEN;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
@@ -88,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = findViewById(R.id.mainTabLayout);
         ViewPager viewPager = findViewById(R.id.mainPager);
 
-        ChallengesFragment challengesFragment = new ChallengesFragment();
+        ChallengesFragment challengesFragment = new ChallengesFragment(MainActivity.this);
         SharingGroupFragment sharingGroupFragment = new SharingGroupFragment();
         SettingsFragment settingsFragment = new SettingsFragment();
 
@@ -106,22 +102,5 @@ public class MainActivity extends AppCompatActivity {
 
     private void showToast(String message) {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-    }
-
-    private void showOfflineAlert() {
-        LayoutInflater inflater = getLayoutInflater();
-        View offlineAlertView = inflater.inflate(R.layout.offline_alert_box, null);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setView(offlineAlertView);
-        AlertDialog offlineAlert = builder.create();
-        offlineAlert.show();
-        Button dismissBtn = offlineAlert.findViewById(R.id.dismissOfflineAlertBtn);
-        dismissBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                offlineAlert.dismiss();
-            }
-        });
     }
 }

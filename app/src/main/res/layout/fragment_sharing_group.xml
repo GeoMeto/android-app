@@ -3,12 +3,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
+    android:padding="10dp"
     tools:context=".fragments.SharingGroupFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Sharing groups" />
+        android:orientation="vertical">
+
+        <Spinner
+            android:id="@+id/sharingDropdown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40sp"
+            android:backgroundTint="@color/backgroundCard"
+            android:gravity="center"
+            android:spinnerMode="dropdown" />
+
+        <ListView
+            android:id="@+id/sharingList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
 </FrameLayout>

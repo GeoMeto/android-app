@@ -1,65 +1,164 @@
 package com.tu.challengeyourself.fragments;
 
+import static com.tu.challengeyourself.constants.Keys.GET_ALL_SHARING_URL;
+import static com.tu.challengeyourself.constants.Keys.GET_HOT_SHARING_URL;
+import static com.tu.challengeyourself.constants.Keys.GET_USER_SHARING_URL;
+import static com.tu.challengeyourself.constants.Keys.TOKEN;
+
+import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.reflect.TypeToken;
 import com.tu.challengeyourself.R;
+import com.tu.challengeyourself.adapters.ChallengeAdapter;
+import com.tu.challengeyourself.adapters.PersonalSharingAdapter;
+import com.tu.challengeyourself.adapters.SharingAdapter;
+import com.tu.challengeyourself.models.dto.CompletedChallengeDTO;
+import com.tu.challengeyourself.models.dto.SharedChallengeDTO;
+import com.tu.challengeyourself.requests.AuthorizedJsonArrayRequest;
+import com.tu.challengeyourself.requests.VolleyManager;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SharingGroupFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import org.json.JSONArray;
+
+import java.lang.reflect.Type;
+import java.time.LocalDateTime;
+import java.util.List;
+
 public class SharingGroupFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private ListView challengesListView;
+    private static final String[] options = {"ALL", "HOT", "MINE"};
+    private Spinner dropdown;
+    private List<SharedChallengeDTO> challenges;
+    private SharingAdapter sharingAdapter;
+    private PersonalSharingAdapter personalSharingAdapter;
+    private Context context;
 
     public SharingGroupFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SharingGroupFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SharingGroupFragment newInstance(String param1, String param2) {
-        SharingGroupFragment fragment = new SharingGroupFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_sharing_group, container, false);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        dropdown = view.findViewById(R.id.challengesDropdown);
+        dropdown.setAdapter(new ArrayAdapter<>(this.getContext(), R.layout.custom_spinner_option, options));
+
+        challengesListView = view.findViewById(R.id.challengesList);
+        setFilterDisplayedChallenges();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void setFilterDisplayedChallenges() {
+        String token = PreferenceManager.getDefaultSharedPreferences(getContext().getApplicationContext()).getString(TOKEN, "");
+        Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, (JsonDeserializer<LocalDateTime>) (json, type, jsonDeserializationContext) ->
+                LocalDateTime.parse(json.getAsJsonPrimitive().getAsString())).create();
+        Type typeToken = new TypeToken<List<SharedChallengeDTO>>() {
+        }.getType();
+
+        dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0: {
+                        VolleyManager.getInstance().addToRequestQueue(
+                                new AuthorizedJsonArrayRequest(Request.Method.GET, GET_ALL_SHARING_URL, token,
+                                        new Response.Listener<JSONArray>() {
+                                            @Override
+                                            public void onResponse(JSONArray response) {
+                                                challenges = gson.fromJson(response.toString(), typeToken);
+
+                                                sharingAdapter = new SharingAdapter(context);
+                                                challengesListView.setAdapter(sharingAdapter);
+                                            }
+                                        }, new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        showToast("There was a problem loading challenges!");
+                                    }
+                                }).getRequest());
+                        break;
+                    }
+                    case 1: {
+                        VolleyManager.getInstance().addToRequestQueue(
+                                new AuthorizedJsonArrayRequest(Request.Method.GET, GET_HOT_SHARING_URL, token,
+                                        new Response.Listener<JSONArray>() {
+                                            @Override
+                                            public void onResponse(JSONArray response) {
+                                                challenges = gson.fromJson(response.toString(), typeToken);
+
+                                                sharingAdapter = new SharingAdapter(context);
+                                                challengesListView.setAdapter(sharingAdapter);
+                                            }
+                                        }, new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        showToast("There was a problem loading challenges!");
+                                    }
+                                }).getRequest());
+                        break;
+                    }
+                    case 2: {
+                        VolleyManager.getInstance().addToRequestQueue(
+                                new AuthorizedJsonArrayRequest(Request.Method.GET, GET_USER_SHARING_URL, token,
+                                        new Response.Listener<JSONArray>() {
+                                            @Override
+                                            public void onResponse(JSONArray response) {
+                                                challenges = gson.fromJson(response.toString(), typeToken);
+
+                                                personalSharingAdapter = new PersonalSharingAdapter(context, challenges);
+                                                challengesListView.setAdapter(personalSharingAdapter);
+                                            }
+                                        }, new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        showToast("There was a problem loading challenges!");
+                                    }
+                                }).getRequest());
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
     }
 }

@@ -1,22 +1,38 @@
 package com.tu.challengeyourself.models.dto;
 
+import com.google.gson.annotations.Expose;
+
 import java.time.LocalDateTime;
 
 public class CompletedChallengeDTO {
 
+    @Expose
     private Integer id;
+    @Expose
     private String name;
+    @Expose
     private String measurement;
+    @Expose
     private String comment;
+    @Expose
     private String description;
+    @Expose
     private Boolean isPositive;
+    @Expose
     private Integer result;
+    @Expose
     private Integer target;
+    @Expose
     private Boolean isShared;
+    @Expose
     private Boolean isCompleted;
+    @Expose
     private Boolean isDeleted;
+    @Expose
     private Integer userId;
+    @Expose(serialize = false, deserialize = true)
     private LocalDateTime createdAt;
+    @Expose(serialize = false, deserialize = true)
     private LocalDateTime updatedAt;
 
     public CompletedChallengeDTO() {
