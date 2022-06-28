@@ -13,7 +13,7 @@ public class SharedChallengeDTO {
     @Expose
     private Boolean isDeleted;
     @Expose
-    private Boolean isLicked;
+    private Boolean isLiked;
     @Expose
     private int userId;
     @Expose
@@ -37,12 +37,12 @@ public class SharedChallengeDTO {
         this.likeCount = likeCount;
     }
 
-    public Boolean getLicked() {
-        return isLicked;
+    public Boolean getLiked() {
+        return isLiked;
     }
 
-    public void setLicked(Boolean licked) {
-        isLicked = licked;
+    public void setLiked(Boolean liked) {
+        isLiked = liked;
     }
 
     public int getId() {

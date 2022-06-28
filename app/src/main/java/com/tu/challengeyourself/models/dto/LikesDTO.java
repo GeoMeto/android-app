@@ -7,7 +7,7 @@ public class LikesDTO {
     @Expose
     private int likesCount;
     @Expose
-    private boolean isLiked;
+    private boolean liked;
 
     public LikesDTO() {
     }
@@ -21,10 +21,10 @@ public class LikesDTO {
     }
 
     public boolean isLiked() {
-        return isLiked;
+        return liked;
     }
 
     public void setLiked(boolean liked) {
-        isLiked = liked;
+        this.liked = liked;
     }
 }

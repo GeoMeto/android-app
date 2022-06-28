@@ -120,7 +120,6 @@ public class ChallengesFragment extends Fragment {
                     }
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 

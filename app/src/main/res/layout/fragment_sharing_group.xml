@@ -23,6 +23,8 @@
 
         <ListView
             android:id="@+id/sharingList"
+            android:clickable="true"
+            android:focusable="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>

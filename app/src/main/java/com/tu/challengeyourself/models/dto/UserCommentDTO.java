@@ -9,6 +9,8 @@ public class UserCommentDTO {
     private String content;
     @Expose
     private String username;
+    @Expose
+    private boolean owner;
 
     public UserCommentDTO() {
     }
@@ -35,5 +37,13 @@ public class UserCommentDTO {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public boolean isOwner() {
+        return owner;
+    }
+
+    public void setOwner(boolean owner) {
+        this.owner = owner;
     }
 }

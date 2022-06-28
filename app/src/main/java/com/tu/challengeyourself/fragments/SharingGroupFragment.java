@@ -31,10 +31,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.reflect.TypeToken;
 import com.tu.challengeyourself.R;
-import com.tu.challengeyourself.adapters.ChallengeAdapter;
 import com.tu.challengeyourself.adapters.PersonalSharingAdapter;
 import com.tu.challengeyourself.adapters.SharingAdapter;
-import com.tu.challengeyourself.models.dto.CompletedChallengeDTO;
 import com.tu.challengeyourself.models.dto.SharedChallengeDTO;
 import com.tu.challengeyourself.requests.AuthorizedJsonArrayRequest;
 import com.tu.challengeyourself.requests.VolleyManager;
@@ -49,13 +47,13 @@ public class SharingGroupFragment extends Fragment {
     private ListView challengesListView;
     private static final String[] options = {"ALL", "HOT", "MINE"};
     private Spinner dropdown;
-    private List<SharedChallengeDTO> challenges;
+    private List<SharedChallengeDTO> sharings;
     private SharingAdapter sharingAdapter;
     private PersonalSharingAdapter personalSharingAdapter;
     private Context context;
 
-    public SharingGroupFragment() {
-        // Required empty public constructor
+    public SharingGroupFragment(Context context) {
+        this.context = context;
     }
 
     @Override
@@ -72,10 +70,9 @@ public class SharingGroupFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        dropdown = view.findViewById(R.id.challengesDropdown);
-        dropdown.setAdapter(new ArrayAdapter<>(this.getContext(), R.layout.custom_spinner_option, options));
-
-        challengesListView = view.findViewById(R.id.challengesList);
+        dropdown = view.findViewById(R.id.sharingDropdown);
+        dropdown.setAdapter(new ArrayAdapter<>(context, R.layout.custom_spinner_option, options));
+        challengesListView = view.findViewById(R.id.sharingList);
         setFilterDisplayedChallenges();
     }
 
@@ -97,9 +94,9 @@ public class SharingGroupFragment extends Fragment {
                                         new Response.Listener<JSONArray>() {
                                             @Override
                                             public void onResponse(JSONArray response) {
-                                                challenges = gson.fromJson(response.toString(), typeToken);
+                                                sharings = gson.fromJson(response.toString(), typeToken);
 
-                                                sharingAdapter = new SharingAdapter(context);
+                                                sharingAdapter = new SharingAdapter(context, sharings);
                                                 challengesListView.setAdapter(sharingAdapter);
                                             }
                                         }, new Response.ErrorListener() {
@@ -116,9 +113,9 @@ public class SharingGroupFragment extends Fragment {
                                         new Response.Listener<JSONArray>() {
                                             @Override
                                             public void onResponse(JSONArray response) {
-                                                challenges = gson.fromJson(response.toString(), typeToken);
+                                                sharings = gson.fromJson(response.toString(), typeToken);
 
-                                                sharingAdapter = new SharingAdapter(context);
+                                                sharingAdapter = new SharingAdapter(context, sharings);
                                                 challengesListView.setAdapter(sharingAdapter);
                                             }
                                         }, new Response.ErrorListener() {
@@ -135,9 +132,9 @@ public class SharingGroupFragment extends Fragment {
                                         new Response.Listener<JSONArray>() {
                                             @Override
                                             public void onResponse(JSONArray response) {
-                                                challenges = gson.fromJson(response.toString(), typeToken);
+                                                sharings = gson.fromJson(response.toString(), typeToken);
 
-                                                personalSharingAdapter = new PersonalSharingAdapter(context, challenges);
+                                                personalSharingAdapter = new PersonalSharingAdapter(context, sharings);
                                                 challengesListView.setAdapter(personalSharingAdapter);
                                             }
                                         }, new Response.ErrorListener() {

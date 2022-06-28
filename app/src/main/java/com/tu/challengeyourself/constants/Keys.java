@@ -30,4 +30,9 @@ public class Keys {
     public static final String CREATE_SHARING_URL = BASE_SHARING_URL + "new";
     public static final String LIKE_SHARING_URL = BASE_SHARING_URL + "like/%d";
     public static final String DELETE_SHARING_URL = BASE_SHARING_URL + "delete/%d";
+    //Comment endpoints
+    public static final String GET_COMMENTS_URL = BASE_SHARING_URL + "%d/comment";
+    public static final String POST_COMMENT_URL = GET_COMMENTS_URL + "/new";
+    public static final String DELETE_COMMENT_URL = BASE_SHARING_URL + "comment/%d";
+    public static final String REPORT_COMMENT_URL = BASE_SHARING_URL + "comment/report/%d";
 }

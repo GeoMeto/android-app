@@ -11,29 +11,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:padding="50sp"
-        android:text="DO YOU WANT TO SHARE THIS COMPLETED CHALLENGE?"
+        android:padding="20sp"
+        android:text="ENTER YOUR COMMENT HERE.\n UP TO 100 CHARACTERS."
         android:textStyle="bold" />
+    <EditText
+        android:id="@+id/commentEdit"
+        android:layout_marginStart="10sp"
+        android:layout_marginEnd="10sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:layout_marginTop="40sp"
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/noAlertBtn"
+            android:id="@+id/noCommentBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="80sp"
             android:background="@drawable/rounded_button"
-            android:text="NO" />
+            android:text="DISMISS" />
 
         <Button
-            android:id="@+id/yesAlertBtn"
+            android:id="@+id/yesCommentBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_button"
-            android:text="YES" />
+            android:text="POST" />
     </LinearLayout>
+
 </LinearLayout>

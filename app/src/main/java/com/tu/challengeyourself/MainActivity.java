@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         ViewPager viewPager = findViewById(R.id.mainPager);
 
         ChallengesFragment challengesFragment = new ChallengesFragment(MainActivity.this);
-        SharingGroupFragment sharingGroupFragment = new SharingGroupFragment();
+        SharingGroupFragment sharingGroupFragment = new SharingGroupFragment(MainActivity.this);
         SettingsFragment settingsFragment = new SettingsFragment();
 
         tabLayout.setupWithViewPager(viewPager);
