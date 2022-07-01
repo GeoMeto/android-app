@@ -8,19 +8,17 @@ public class ChallengeDTO {
     private String measurement;
     private String category;
     private String description;
-    private Boolean isPositive;
 
     public ChallengeDTO() {
     }
 
-    public ChallengeDTO(int id, int target, String name, String measurement, String category, String description, Boolean isPositive) {
+    public ChallengeDTO(int id, int target, String name, String measurement, String category, String description) {
         this.id = id;
         this.target = target;
         this.name = name;
         this.measurement = measurement;
         this.category = category;
         this.description = description;
-        this.isPositive = isPositive;
     }
 
     public int getId() {
@@ -69,13 +67,5 @@ public class ChallengeDTO {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Boolean getPositive() {
-        return isPositive;
-    }
-
-    public void setPositive(Boolean positive) {
-        isPositive = positive;
     }
 }

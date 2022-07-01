@@ -22,7 +22,7 @@ public class CreateChallengeAdapter extends ArrayAdapter<ChallengeDTO> {
     private Context context;
 
     public CreateChallengeAdapter(Context context, List<ChallengeDTO> challenges) {
-        super(context, R.layout.challenge_item, challenges);
+        super(context, R.layout.create_challenge_item, challenges);
         this.context = context;
     }
 

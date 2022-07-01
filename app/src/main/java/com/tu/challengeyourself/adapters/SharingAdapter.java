@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,8 +28,7 @@ import java.util.stream.Collectors;
 public class SharingAdapter extends ArrayAdapter<SharedChallengeDTO> {
 
     private Context context;
-    public Button openCommentsBtn;
-    private ImageButton likeBtn;
+    private ImageView likeBtn;
     private List<SharedChallengeDTO> sharings;
 
     public SharingAdapter(Context context, List<SharedChallengeDTO> sharings) {
@@ -55,7 +55,6 @@ public class SharingAdapter extends ArrayAdapter<SharedChallengeDTO> {
         TextView commentsTxt = row.findViewById(R.id.commentsTxt);
         TextView likesCounterTxt = row.findViewById(R.id.likeCounterSharingTxt);
         likeBtn = row.findViewById(R.id.likeSharingBtn);
-        openCommentsBtn = row.findViewById(R.id.commentSharingBtn);
 
         setLikeImages(sharing.getLiked());
 
@@ -67,8 +66,6 @@ public class SharingAdapter extends ArrayAdapter<SharedChallengeDTO> {
         targetCountTxt.setText(challenge.getTarget() + "");
         likesCounterTxt.setText(sharing.getLikeCount() + "");
         commentsTxt.setText(formatComments(sharing.getUserCommentDTO()));
-
-        initCommentButton(sharing);
 
         return row;
     }
@@ -84,27 +81,5 @@ public class SharingAdapter extends ArrayAdapter<SharedChallengeDTO> {
         } else {
             likeBtn.setImageResource(R.drawable.ic_empty_like_24);
         }
-    }
-
-    private void initCommentButton(SharedChallengeDTO sharing) {
-        CompletedChallengeDTO challenge = sharing.getCompletedChallengeDTO();
-
-        openCommentsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, SharingCommentsActivity.class);
-                intent.putExtra("id", sharing.getId());
-                intent.putExtra("name", challenge.getName());
-                intent.putExtra("description", challenge.getDescription());
-                intent.putExtra("comment", challenge.getComment());
-                intent.putExtra("measurement", challenge.getMeasurement());
-                intent.putExtra("target", challenge.getTarget());
-                intent.putExtra("result", challenge.getResult());
-                intent.putExtra("likes", sharing.getLikeCount());
-                intent.putExtra("isLiked", sharing.getLiked());
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.getApplicationContext().startActivity(intent);
-            }
-        });
     }
 }

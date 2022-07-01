@@ -62,6 +62,4 @@
             android:background="@drawable/rounded_button"
             android:text="Select" />
     </LinearLayout>
-
-
 </LinearLayout>

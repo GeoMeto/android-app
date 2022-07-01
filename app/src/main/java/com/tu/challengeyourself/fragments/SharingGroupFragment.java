@@ -6,6 +6,7 @@ import static com.tu.challengeyourself.constants.Keys.GET_USER_SHARING_URL;
 import static com.tu.challengeyourself.constants.Keys.TOKEN;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -31,8 +32,11 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.reflect.TypeToken;
 import com.tu.challengeyourself.R;
+import com.tu.challengeyourself.SharingCommentsActivity;
 import com.tu.challengeyourself.adapters.PersonalSharingAdapter;
 import com.tu.challengeyourself.adapters.SharingAdapter;
+import com.tu.challengeyourself.models.dto.ChallengeDTO;
+import com.tu.challengeyourself.models.dto.CompletedChallengeDTO;
 import com.tu.challengeyourself.models.dto.SharedChallengeDTO;
 import com.tu.challengeyourself.requests.AuthorizedJsonArrayRequest;
 import com.tu.challengeyourself.requests.VolleyManager;
@@ -74,6 +78,31 @@ public class SharingGroupFragment extends Fragment {
         dropdown.setAdapter(new ArrayAdapter<>(context, R.layout.custom_spinner_option, options));
         challengesListView = view.findViewById(R.id.sharingList);
         setFilterDisplayedChallenges();
+        initSharingNavigation();
+    }
+
+    private void initSharingNavigation() {
+        challengesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                SharedChallengeDTO sharing = ((SharedChallengeDTO) parent.getItemAtPosition(position));
+                CompletedChallengeDTO challenge = sharing.getCompletedChallengeDTO();
+
+                Intent intent = new Intent(context, SharingCommentsActivity.class);
+                intent.putExtra("id", sharing.getId());
+                intent.putExtra("name", challenge.getName());
+                intent.putExtra("description", challenge.getDescription());
+                intent.putExtra("comment", challenge.getComment());
+                intent.putExtra("measurement", challenge.getMeasurement());
+                intent.putExtra("target", challenge.getTarget());
+                intent.putExtra("result", challenge.getResult());
+                intent.putExtra("likes", sharing.getLikeCount());
+                intent.putExtra("isLiked", sharing.getLiked());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.getApplicationContext().startActivity(intent);
+            }
+        });
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

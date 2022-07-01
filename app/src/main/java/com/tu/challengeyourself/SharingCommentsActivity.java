@@ -5,6 +5,7 @@ import static com.tu.challengeyourself.constants.Keys.GET_COMMENTS_URL;
 import static com.tu.challengeyourself.constants.Keys.LIKE_SHARING_URL;
 import static com.tu.challengeyourself.constants.Keys.POST_COMMENT_URL;
 import static com.tu.challengeyourself.constants.Keys.REPORT_COMMENT_URL;
+import static com.tu.challengeyourself.constants.Keys.REPORT_SHARING_URL;
 import static com.tu.challengeyourself.constants.Keys.TOKEN;
 
 import android.os.Build;
@@ -47,7 +48,7 @@ import java.util.List;
 public class SharingCommentsActivity extends AppCompatActivity {
 
     private TextView nameTxt, descTxt, measurementTxt, targetTxt, resultTxt, commentTxt, likesTxt;
-    private Button addCommentBtn;
+    private Button addCommentBtn, reportBtn;
     private ImageButton likeBtn;
     private Bundle bundle;
     private int sharingId;
@@ -71,6 +72,7 @@ public class SharingCommentsActivity extends AppCompatActivity {
         initCommentsList(sharingId);
         initLikeButton();
         initCommentButton();
+        intiReportButton();
     }
 
     private void initCommentsList(int sharingId) {
@@ -106,14 +108,44 @@ public class SharingCommentsActivity extends AppCompatActivity {
                 String action = ((TextView) view.findViewById(R.id.reportDeleteCommentBtn)).getText().toString();
                 UserCommentDTO userCommentDTO = ((UserCommentDTO) parent.getItemAtPosition(position));
                 if (action.equals("DELETE")) {
-                    deleteComment(userCommentDTO);
+                    AlertDialog alertDialog = InflaterUtils.showCommentAlert(SharingCommentsActivity.this, R.layout.delete_comment_alert_box);
+                    Button dismissBtn = alertDialog.findViewById(R.id.noDeleteCommentBtn);
+                    Button confirmBtn = alertDialog.findViewById(R.id.yesDeleteCommentBtn);
+                    dismissBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            alertDialog.dismiss();
+                        }
+                    });
+                    confirmBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            deleteComment(userCommentDTO);
+                            alertDialog.dismiss();
+                        }
+                    });
                 } else if (action.equals("REPORT")) {
-                    reportComment(userCommentDTO.getId());
+                    AlertDialog alertDialog = InflaterUtils.showCommentAlert(SharingCommentsActivity.this, R.layout.report_comment_alert_box);
+                    Button dismissBtn = alertDialog.findViewById(R.id.noReportCommentBtn);
+                    Button confirmBtn = alertDialog.findViewById(R.id.yesReportCommentBtn);
+                    dismissBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            alertDialog.dismiss();
+                        }
+                    });
+                    confirmBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            reportComment(userCommentDTO.getId());
+                            alertDialog.dismiss();
+                        }
+                    });
+
                 }
             }
         });
     }
-
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void deleteComment(UserCommentDTO comment) {
@@ -216,6 +248,55 @@ public class SharingCommentsActivity extends AppCompatActivity {
                                     @Override
                                     public void onErrorResponse(VolleyError error) {
                                         InflaterUtils.showToast(SharingCommentsActivity.this, "There was a problem on sharing of challenge!");
+                                    }
+                                }).getRequest());
+                        alertDialog.dismiss();
+                    }
+                });
+
+                dismissBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
+
+            }
+        });
+    }
+
+    private void intiReportButton() {
+        reportBtn = findViewById(R.id.reportCommentSharingBtn);
+
+        reportBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog alertDialog = InflaterUtils.showCommentAlert(SharingCommentsActivity.this, R.layout.report_sharing_alert_box);
+                Button dismissBtn = alertDialog.findViewById(R.id.noReportSharingBtn);
+                Button confirmBtn = alertDialog.findViewById(R.id.yesReportSharingBtn);
+
+                confirmBtn.setOnClickListener(new View.OnClickListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
+                    @Override
+                    public void onClick(View v) {
+
+                        String token = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString(TOKEN, "");
+
+                        VolleyManager.getInstance().addToRequestQueue(
+                                new AuthorizedJsonRequest(Request.Method.POST, String.format(REPORT_SHARING_URL, sharingId), token,
+                                        new Response.Listener<JSONObject>() {
+                                            @Override
+                                            public void onResponse(JSONObject response) {
+                                                Type typeToken = new TypeToken<UserCommentDTO>() {
+                                                }.getType();
+                                                UserCommentDTO dto = gson.fromJson(response.toString(), typeToken);
+                                                commentAdapter.add(dto);
+                                                commentAdapter.notifyDataSetChanged();
+                                            }
+                                        }, new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        InflaterUtils.showToast(SharingCommentsActivity.this, "There was a problem on reporting this challenge!");
                                     }
                                 }).getRequest());
                         alertDialog.dismiss();
