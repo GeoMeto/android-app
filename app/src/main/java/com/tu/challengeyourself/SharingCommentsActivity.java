@@ -287,11 +287,7 @@ public class SharingCommentsActivity extends AppCompatActivity {
                                         new Response.Listener<JSONObject>() {
                                             @Override
                                             public void onResponse(JSONObject response) {
-                                                Type typeToken = new TypeToken<UserCommentDTO>() {
-                                                }.getType();
-                                                UserCommentDTO dto = gson.fromJson(response.toString(), typeToken);
-                                                commentAdapter.add(dto);
-                                                commentAdapter.notifyDataSetChanged();
+                                                InflaterUtils.showToast(SharingCommentsActivity.this, "Your report was created");
                                             }
                                         }, new Response.ErrorListener() {
                                     @Override

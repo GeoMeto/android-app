@@ -41,7 +41,6 @@ public class SettingsFragment extends Fragment {
 
         setResetPassListener(view);
         setChangeUsernameListener(view);
-        setNotificationsListener(view);
         setDeleteAccListener(view);
         setLogOutListener(view);
     }
@@ -62,16 +61,6 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext(), ChangeUsernameSettingsActivity.class));
-            }
-        });
-    }
-
-    private void setNotificationsListener(View view) {
-        View resetPassContainer = view.findViewById(R.id.notificationSettingsBtn);
-        resetPassContainer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getContext(), NotificationSettingsActivity.class));
             }
         });
     }

@@ -30,15 +30,11 @@ public class CompletedChallengeDTO {
     private Boolean isDeleted;
     @Expose
     private Integer userId;
-    @Expose(serialize = false, deserialize = true)
-    private LocalDateTime createdAt;
-    @Expose(serialize = false, deserialize = true)
-    private LocalDateTime updatedAt;
 
     public CompletedChallengeDTO() {
     }
 
-    public CompletedChallengeDTO(int id, String name, String measurement, String comment, String description, Boolean isPositive, int result, int target, Boolean isShared, Boolean isCompleted, Boolean isDeleted, int userId, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public CompletedChallengeDTO(int id, String name, String measurement, String comment, String description, Boolean isPositive, int result, int target, Boolean isShared, Boolean isCompleted, Boolean isDeleted, int userId) {
         this.id = id;
         this.name = name;
         this.measurement = measurement;
@@ -51,8 +47,6 @@ public class CompletedChallengeDTO {
         this.isCompleted = isCompleted;
         this.isDeleted = isDeleted;
         this.userId = userId;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
     }
 
     public int getId() {
@@ -149,21 +143,5 @@ public class CompletedChallengeDTO {
 
     public void setUserId(int userId) {
         this.userId = userId;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
     }
 }

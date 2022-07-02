@@ -108,8 +108,7 @@ public class SharingGroupFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void setFilterDisplayedChallenges() {
         String token = PreferenceManager.getDefaultSharedPreferences(getContext().getApplicationContext()).getString(TOKEN, "");
-        Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, (JsonDeserializer<LocalDateTime>) (json, type, jsonDeserializationContext) ->
-                LocalDateTime.parse(json.getAsJsonPrimitive().getAsString())).create();
+        Gson gson = new GsonBuilder().create();
         Type typeToken = new TypeToken<List<SharedChallengeDTO>>() {
         }.getType();
 

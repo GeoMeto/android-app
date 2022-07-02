@@ -2,6 +2,7 @@ package com.tu.challengeyourself.models.dto;
 
 import com.google.gson.annotations.Expose;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -15,15 +16,9 @@ public class SharedChallengeDTO {
     @Expose
     private Boolean isLiked;
     @Expose
-    private int userId;
-    @Expose
     private CompletedChallengeDTO completedChallengeDTO;
     @Expose
     private List<UserCommentDTO> userCommentDTO;
-
-    @Expose(serialize = false, deserialize = true)
-    private LocalDateTime createdAt;
-
 
     public SharedChallengeDTO() {
 
@@ -61,13 +56,6 @@ public class SharedChallengeDTO {
         isDeleted = deleted;
     }
 
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
 
     public CompletedChallengeDTO getCompletedChallengeDTO() {
         return completedChallengeDTO;
@@ -83,13 +71,5 @@ public class SharedChallengeDTO {
 
     public void setUserCommentDTO(List<UserCommentDTO> userCommentDTO) {
         this.userCommentDTO = userCommentDTO;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
     }
 }
