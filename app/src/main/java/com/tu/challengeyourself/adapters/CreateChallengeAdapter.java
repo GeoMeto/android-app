@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.tu.challengeyourself.R;
-import com.tu.challengeyourself.models.dto.ChallengeDTO;
+import com.tu.challengeyourself.models.responses.ChallengeDTO;
 
 import java.util.List;
 

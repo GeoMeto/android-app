@@ -12,7 +12,7 @@ import com.tu.challengeyourself.R;
 
 public class InflaterUtils {
 
-    public static AlertDialog showCommentAlert(Context context, int resourceId) {
+    public static AlertDialog showAlert(Context context, int resourceId) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View alertInflater = inflater.inflate(resourceId, null);
 

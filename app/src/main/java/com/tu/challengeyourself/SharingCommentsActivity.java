@@ -31,8 +31,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.reflect.TypeToken;
 import com.tu.challengeyourself.adapters.CommentAdapter;
-import com.tu.challengeyourself.models.dto.LikesDTO;
-import com.tu.challengeyourself.models.dto.UserCommentDTO;
+import com.tu.challengeyourself.models.responses.LikesDTO;
+import com.tu.challengeyourself.models.responses.UserCommentDTO;
 import com.tu.challengeyourself.requests.AuthorizedJsonArrayRequest;
 import com.tu.challengeyourself.requests.AuthorizedJsonRequest;
 import com.tu.challengeyourself.requests.VolleyManager;
@@ -108,7 +108,7 @@ public class SharingCommentsActivity extends AppCompatActivity {
                 String action = ((TextView) view.findViewById(R.id.reportDeleteCommentBtn)).getText().toString();
                 UserCommentDTO userCommentDTO = ((UserCommentDTO) parent.getItemAtPosition(position));
                 if (action.equals("DELETE")) {
-                    AlertDialog alertDialog = InflaterUtils.showCommentAlert(SharingCommentsActivity.this, R.layout.delete_comment_alert_box);
+                    AlertDialog alertDialog = InflaterUtils.showAlert(SharingCommentsActivity.this, R.layout.delete_comment_alert_box);
                     Button dismissBtn = alertDialog.findViewById(R.id.noDeleteCommentBtn);
                     Button confirmBtn = alertDialog.findViewById(R.id.yesDeleteCommentBtn);
                     dismissBtn.setOnClickListener(new View.OnClickListener() {
@@ -125,7 +125,7 @@ public class SharingCommentsActivity extends AppCompatActivity {
                         }
                     });
                 } else if (action.equals("REPORT")) {
-                    AlertDialog alertDialog = InflaterUtils.showCommentAlert(SharingCommentsActivity.this, R.layout.report_comment_alert_box);
+                    AlertDialog alertDialog = InflaterUtils.showAlert(SharingCommentsActivity.this, R.layout.report_comment_alert_box);
                     Button dismissBtn = alertDialog.findViewById(R.id.noReportCommentBtn);
                     Button confirmBtn = alertDialog.findViewById(R.id.yesReportCommentBtn);
                     dismissBtn.setOnClickListener(new View.OnClickListener() {
@@ -211,7 +211,7 @@ public class SharingCommentsActivity extends AppCompatActivity {
         addCommentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog alertDialog = InflaterUtils.showCommentAlert(SharingCommentsActivity.this, R.layout.comment_alert_box);
+                AlertDialog alertDialog = InflaterUtils.showAlert(SharingCommentsActivity.this, R.layout.comment_alert_box);
                 Button dismissBtn = alertDialog.findViewById(R.id.noCommentBtn);
                 Button confirmBtn = alertDialog.findViewById(R.id.yesCommentBtn);
                 EditText contentEdit = alertDialog.findViewById(R.id.commentEdit);
@@ -271,7 +271,7 @@ public class SharingCommentsActivity extends AppCompatActivity {
         reportBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog alertDialog = InflaterUtils.showCommentAlert(SharingCommentsActivity.this, R.layout.report_sharing_alert_box);
+                AlertDialog alertDialog = InflaterUtils.showAlert(SharingCommentsActivity.this, R.layout.report_sharing_alert_box);
                 Button dismissBtn = alertDialog.findViewById(R.id.noReportSharingBtn);
                 Button confirmBtn = alertDialog.findViewById(R.id.yesReportSharingBtn);
 

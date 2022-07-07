@@ -29,22 +29,19 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializer;
 import com.google.gson.reflect.TypeToken;
 import com.tu.challengeyourself.R;
 import com.tu.challengeyourself.SharingCommentsActivity;
 import com.tu.challengeyourself.adapters.PersonalSharingAdapter;
 import com.tu.challengeyourself.adapters.SharingAdapter;
-import com.tu.challengeyourself.models.dto.ChallengeDTO;
-import com.tu.challengeyourself.models.dto.CompletedChallengeDTO;
-import com.tu.challengeyourself.models.dto.SharedChallengeDTO;
+import com.tu.challengeyourself.models.responses.CompletedChallengeDTO;
+import com.tu.challengeyourself.models.responses.SharedChallengeDTO;
 import com.tu.challengeyourself.requests.AuthorizedJsonArrayRequest;
 import com.tu.challengeyourself.requests.VolleyManager;
 
 import org.json.JSONArray;
 
 import java.lang.reflect.Type;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class SharingGroupFragment extends Fragment {

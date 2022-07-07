@@ -30,6 +30,8 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static SharingGroupFragment sharingGroupFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         ViewPager viewPager = findViewById(R.id.mainPager);
 
         ChallengesFragment challengesFragment = new ChallengesFragment(MainActivity.this);
-        SharingGroupFragment sharingGroupFragment = new SharingGroupFragment(MainActivity.this);
+        sharingGroupFragment = new SharingGroupFragment(MainActivity.this);
         SettingsFragment settingsFragment = new SettingsFragment();
 
         tabLayout.setupWithViewPager(viewPager);

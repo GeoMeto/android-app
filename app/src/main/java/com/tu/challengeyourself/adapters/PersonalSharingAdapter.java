@@ -22,9 +22,9 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.tu.challengeyourself.R;
-import com.tu.challengeyourself.models.dto.CompletedChallengeDTO;
-import com.tu.challengeyourself.models.dto.SharedChallengeDTO;
-import com.tu.challengeyourself.models.dto.UserCommentDTO;
+import com.tu.challengeyourself.models.responses.CompletedChallengeDTO;
+import com.tu.challengeyourself.models.responses.SharedChallengeDTO;
+import com.tu.challengeyourself.models.responses.UserCommentDTO;
 import com.tu.challengeyourself.requests.AuthorizedJsonRequest;
 import com.tu.challengeyourself.requests.VolleyManager;
 

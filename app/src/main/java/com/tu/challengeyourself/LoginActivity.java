@@ -23,6 +23,7 @@ import com.google.gson.GsonBuilder;
 import com.tu.challengeyourself.models.Login;
 import com.tu.challengeyourself.requests.VolleyManager;
 import com.tu.challengeyourself.utils.EncryptionUtils;
+import com.tu.challengeyourself.utils.InflaterUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,13 +51,9 @@ public class LoginActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                try {
-                    String email = emailEdit.getText().toString();
-                    String password = passEdit.getText().toString();
-                    login(new Login(email, password));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                String email = emailEdit.getText().toString();
+                String password = passEdit.getText().toString();
+                login(new Login(email, password));
             }
         });
     }
@@ -64,17 +61,16 @@ public class LoginActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void login(Login login) {
         if (login.getEmail().equals("") || login.getPass().equals("")) {
-            showToast("Empty credentials!");
+            InflaterUtils.showToast(LoginActivity.this, "Empty credentials!");
             return;
         }
-        final boolean[] isLoginSuccessful = {false};
         login.setPass(new EncryptionUtils().encrypt(login.getPass()));
         JSONObject jsonObject;
         try {
             jsonObject = new JSONObject(new GsonBuilder().create().toJson(login));
         } catch (JSONException e) {
             e.printStackTrace();
-            showToast("There was an error on login!");
+            InflaterUtils.showToast(LoginActivity.this, "There was an error on login!");
             return;
         }
 
@@ -97,13 +93,9 @@ public class LoginActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        showToast("Invalid credentials!");
+                        InflaterUtils.showToast(LoginActivity.this, "Invalid credentials!");
                     }
                 }));
-    }
-
-    private void showToast(String message) {
-        Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
     }
 
     private void setCreateAccListener() {

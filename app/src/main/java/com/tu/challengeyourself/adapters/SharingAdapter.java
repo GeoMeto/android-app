@@ -1,14 +1,11 @@
 package com.tu.challengeyourself.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,10 +14,9 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 import com.tu.challengeyourself.R;
-import com.tu.challengeyourself.SharingCommentsActivity;
-import com.tu.challengeyourself.models.dto.CompletedChallengeDTO;
-import com.tu.challengeyourself.models.dto.SharedChallengeDTO;
-import com.tu.challengeyourself.models.dto.UserCommentDTO;
+import com.tu.challengeyourself.models.responses.CompletedChallengeDTO;
+import com.tu.challengeyourself.models.responses.SharedChallengeDTO;
+import com.tu.challengeyourself.models.responses.UserCommentDTO;
 
 import java.util.List;
 import java.util.stream.Collectors;

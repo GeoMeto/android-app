@@ -1,4 +1,4 @@
-package com.tu.challengeyourself.models.dto;
+package com.tu.challengeyourself.models.responses;
 
 public class ChallengeDTO {
 

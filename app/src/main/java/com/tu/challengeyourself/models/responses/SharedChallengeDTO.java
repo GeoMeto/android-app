@@ -1,9 +1,7 @@
-package com.tu.challengeyourself.models.dto;
+package com.tu.challengeyourself.models.responses;
 
 import com.google.gson.annotations.Expose;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class SharedChallengeDTO {

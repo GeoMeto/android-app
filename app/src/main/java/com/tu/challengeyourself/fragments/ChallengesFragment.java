@@ -32,7 +32,7 @@ import com.google.gson.reflect.TypeToken;
 import com.tu.challengeyourself.CreateChallengeActivity;
 import com.tu.challengeyourself.R;
 import com.tu.challengeyourself.adapters.ChallengeAdapter;
-import com.tu.challengeyourself.models.dto.CompletedChallengeDTO;
+import com.tu.challengeyourself.models.responses.CompletedChallengeDTO;
 import com.tu.challengeyourself.requests.AuthorizedJsonArrayRequest;
 import com.tu.challengeyourself.requests.VolleyManager;
 
@@ -44,7 +44,7 @@ import java.util.List;
 public class ChallengesFragment extends Fragment {
 
     private ListView challengesListView;
-    private static final String[] options = {"ACTIVE", "COMPLETED"};
+    private static final String[] OPTIONS = {"ACTIVE", "COMPLETED"};
     private Spinner dropdown;
     private List<CompletedChallengeDTO> challenges;
     private ChallengeAdapter challengeAdapter;
@@ -67,21 +67,19 @@ public class ChallengesFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        String token = PreferenceManager.getDefaultSharedPreferences(getContext().getApplicationContext()).getString(TOKEN, "");
         dropdown = view.findViewById(R.id.challengesDropdown);
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this.getContext(), R.layout.custom_spinner_option, options);
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this.getContext(), R.layout.custom_spinner_option, OPTIONS);
         dropdown.setAdapter(spinnerAdapter);
-
         challengesListView = view.findViewById(R.id.challengesList);
+
+        String token = PreferenceManager.getDefaultSharedPreferences(getContext().getApplicationContext()).getString(TOKEN, "");
         VolleyManager.getInstance().addToRequestQueue(
                 new AuthorizedJsonArrayRequest(Request.Method.GET, GET_CHALLENGES_URL, token,
                         new Response.Listener<JSONArray>() {
                             @RequiresApi(api = Build.VERSION_CODES.O)
                             @Override
                             public void onResponse(JSONArray response) {
-                                Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, (JsonDeserializer<LocalDateTime>) (json, type, jsonDeserializationContext) ->
-                                        LocalDateTime.parse(json.getAsJsonPrimitive().getAsString())).create();
-                                challenges = gson.fromJson(response.toString(), new TypeToken<List<CompletedChallengeDTO>>() {
+                                challenges = new GsonBuilder().create().fromJson(response.toString(), new TypeToken<List<CompletedChallengeDTO>>() {
                                 }.getType());
 
                                 challengeAdapter = new ChallengeAdapter(context, challenges);

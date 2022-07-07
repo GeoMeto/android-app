@@ -37,10 +37,5 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
-    <TextView
-        android:text="YOUR ACCOUNT WILL BE PERMANENTLY DELETED AND ALL HISTORY RELATED TO IT WILL BE LOST"
-        android:textSize="18sp"
-        android:gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+
 </LinearLayout>

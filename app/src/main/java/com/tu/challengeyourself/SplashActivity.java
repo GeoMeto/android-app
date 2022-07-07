@@ -33,6 +33,7 @@ public class SplashActivity extends AppCompatActivity {
         VolleyManager.getInstance(this);
         if (authToken.getToken().equals("")) {
             navigateToLogin();
+            return;
         }
         JSONObject jsonObject = null;
         try {

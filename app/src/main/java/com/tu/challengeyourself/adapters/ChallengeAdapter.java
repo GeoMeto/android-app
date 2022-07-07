@@ -30,8 +30,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.tu.challengeyourself.CompleteChallengeActivity;
 import com.tu.challengeyourself.R;
-import com.tu.challengeyourself.models.dto.CompletedChallengeDTO;
-import com.tu.challengeyourself.models.dto.SharedChallengeDTO;
+import com.tu.challengeyourself.models.responses.CompletedChallengeDTO;
+import com.tu.challengeyourself.models.responses.SharedChallengeDTO;
 import com.tu.challengeyourself.requests.AuthorizedJsonRequest;
 import com.tu.challengeyourself.requests.VolleyManager;
 
@@ -112,11 +112,12 @@ public class ChallengeAdapter extends ArrayAdapter<CompletedChallengeDTO> implem
                                         filteredData = filteredData.stream().filter(x-> x.getId() != id).collect(Collectors.toList());
                                         challenges = challenges.stream().filter(x-> x.getId() != id).collect(Collectors.toList());
                                         notifyDataSetChanged();
+                                        getFilter().filter(Boolean.TRUE.toString());
                                     }
                                 }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                showToast("There was a problem with deleting of challenge!");
+                                showToast("There was a problem with deleting this challenge!");
                             }
                         }).getRequest());
             }
@@ -194,7 +195,9 @@ public class ChallengeAdapter extends ArrayAdapter<CompletedChallengeDTO> implem
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
                 FilterResults results = new FilterResults();
-                results.values = challenges.stream().filter(x -> x.getCompleted().toString().equals(constraint)).collect(Collectors.toList());
+                results.values = challenges
+                        .stream().filter(x -> x.getCompleted().toString().equals(constraint))
+                        .collect(Collectors.toList());
                 return results;
             }
 

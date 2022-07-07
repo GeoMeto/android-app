@@ -12,7 +12,8 @@ public class AuthorizedJsonArrayRequest {
 
     private JsonArrayRequest request;
 
-    public AuthorizedJsonArrayRequest(int requestMethod, String url, String token, Response.Listener listener, Response.ErrorListener errorListener) {
+    public AuthorizedJsonArrayRequest(int requestMethod, String url, String token,
+                                      Response.Listener listener, Response.ErrorListener errorListener) {
 
         this.request = new JsonArrayRequest(requestMethod, url, null, listener, errorListener) {
             @Override
@@ -28,3 +29,4 @@ public class AuthorizedJsonArrayRequest {
         return request;
     }
 }
+

@@ -1,8 +1,6 @@
-package com.tu.challengeyourself.models.dto;
+package com.tu.challengeyourself.models.responses;
 
 import com.google.gson.annotations.Expose;
-
-import java.time.LocalDateTime;
 
 public class CompletedChallengeDTO {
 
@@ -16,8 +14,6 @@ public class CompletedChallengeDTO {
     private String comment;
     @Expose
     private String description;
-    @Expose
-    private Boolean isPositive;
     @Expose
     private Integer result;
     @Expose
@@ -34,13 +30,12 @@ public class CompletedChallengeDTO {
     public CompletedChallengeDTO() {
     }
 
-    public CompletedChallengeDTO(int id, String name, String measurement, String comment, String description, Boolean isPositive, int result, int target, Boolean isShared, Boolean isCompleted, Boolean isDeleted, int userId) {
+    public CompletedChallengeDTO(int id, String name, String measurement, String comment, String description, int result, int target, Boolean isShared, Boolean isCompleted, Boolean isDeleted, int userId) {
         this.id = id;
         this.name = name;
         this.measurement = measurement;
         this.comment = comment;
         this.description = description;
-        this.isPositive = isPositive;
         this.result = result;
         this.target = target;
         this.isShared = isShared;
@@ -87,14 +82,6 @@ public class CompletedChallengeDTO {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Boolean getPositive() {
-        return isPositive;
-    }
-
-    public void setPositive(Boolean positive) {
-        isPositive = positive;
     }
 
     public int getResult() {

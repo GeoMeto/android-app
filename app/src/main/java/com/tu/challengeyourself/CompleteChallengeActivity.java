@@ -19,7 +19,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.tu.challengeyourself.models.dto.CompletedChallengeDTO;
+import com.tu.challengeyourself.fragments.SharingGroupFragment;
+import com.tu.challengeyourself.models.responses.CompletedChallengeDTO;
 import com.tu.challengeyourself.requests.AuthorizedJsonRequest;
 import com.tu.challengeyourself.requests.VolleyManager;
 
@@ -119,7 +120,7 @@ public class CompleteChallengeActivity extends AppCompatActivity {
 
     private void navigateToMain() {
         Intent mainIntent = new Intent(this, MainActivity.class);
-        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(mainIntent);
         finish();
     }

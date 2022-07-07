@@ -1,33 +1,19 @@
 package com.tu.challengeyourself.adapters;
 
-import static com.tu.challengeyourself.constants.Keys.DELETE_COMMENT_URL;
-import static com.tu.challengeyourself.constants.Keys.REPORT_COMMENT_URL;
-import static com.tu.challengeyourself.constants.Keys.TOKEN;
-
 import android.content.Context;
 import android.os.Build;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.tu.challengeyourself.R;
-import com.tu.challengeyourself.models.dto.UserCommentDTO;
-import com.tu.challengeyourself.requests.AuthorizedJsonRequest;
-import com.tu.challengeyourself.requests.VolleyManager;
-
-import org.json.JSONObject;
+import com.tu.challengeyourself.models.responses.UserCommentDTO;
 
 import java.util.List;
 
